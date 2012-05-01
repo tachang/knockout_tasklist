@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="jquery.parse.js"></script>
+
+    <script src="knockout-2.1.0rc2.debug.js"></script>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style>
+    input {
+      height: 24px;
+    }
+    </style>
+  </head>
+
+  <body>
+
+   <div class="span9">
+
+    <h3>My Tasklist</h3>
+
+  <form data-bind="submit: addTask">
+    Add task: <input data-bind="value: newTaskText, valueUpdate:'keyup'" placeholder="What needs to be done?" />
+    <button type="submit">Add</button>
+  Characters in Task: <span data-bind="text: newTaskTextLength">&nbsp;</span>
+
+  </form>
+
+
+
+
+  <ul data-bind="foreach: tasks, visible: tasks().length > 0">
+    <li>
+        <input type="checkbox" data-bind="checked: isDone" />
+        <input data-bind="value: title, disable: isDone" />
+        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+    </li>
+  </ul>
+
+  You have <b data-bind="text: incompleteTasks().length">&nbsp;</b> incomplete task(s)
+  <span data-bind="visible: incompleteTasks().length == 0"> - it's beer time!</span>
+  </div>
+  </body>
+
+  <!-- Needs to be added at the bottom because the HTML needs to load before Knockout binds to them -->
+  <script src="tasklist.js"></script>
+
+</html>
